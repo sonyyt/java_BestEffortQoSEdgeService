@@ -1,0 +1,38 @@
+//		String xml_data = 
+//				"<service><id>getTemp</id><cost>100</cost><latency>100</latency><reliability>97</reliability><input>N.A</input><output>temperature</output>"
+//				+ "<microservice><id>readTempSensor</id><input>N.A</input><output>temperature</output></microservice>"
+//				+ "<microservice><id>estTemp</id><input>N.A</input><output>temperature</output></microservice>"
+//				+ "<microservice><id>getGPS</id><input>N.A</input><output>GPS:location</output></microservice>"
+//				+ "<microservice><id>readLocTemp</id><input>location</input><output>temperature</output></microservice>"
+//				+ "</service>";
+
+//Cache: 
+package com;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.Caching;
+import javax.cache.configuration.MutableConfiguration;
+import javax.cache.expiry.AccessedExpiryPolicy;
+import javax.cache.expiry.Duration;
+
+public class ProductCacheSample {
+    public static void main(String[] args) {
+        CacheManager manager = Caching.getCachingProvider().getCacheManager();
+        MutableConfiguration<Integer, List<String>> configuration = new MutableConfiguration<>();
+        configuration.setExpiryPolicyFactory(AccessedExpiryPolicy.factoryOf(Duration.ETERNAL));
+        Cache<Integer, List<String>> productCache = manager.createCache("productYear", configuration);
+        List<String> products = productCache.get(2018);
+        if(products == null) {
+            products = new ArrayList<>();
+        }
+        products.add("new Product");
+        productCache.put(2018, products);
+        System.out.println(productCache.get(2018));
+    }
+    private ProductCacheSample() {
+    }
+}

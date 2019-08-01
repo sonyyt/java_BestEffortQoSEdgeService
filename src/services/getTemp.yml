@@ -1,0 +1,11 @@
+id: getTemp
+cost: 100
+latency: 100
+reliability: 97
+input: N.A
+output: temperature
+microservices: 
+- {id: readTempSensor, input: N.A, output: temperature}
+- {id: estTemp, input: N.A, output: temperature}
+- {id: getGPS, input: N.A, output: GPS>location}
+- {id: readLocTemp, input: location, output: temperature}

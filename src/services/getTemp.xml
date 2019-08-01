@@ -1,0 +1,28 @@
+<service>
+	<id>getTemp</id>
+	<cost>100</cost>
+	<latency>100</latency>
+	<reliability>97</reliability>
+	<input>N.A</input>
+	<output>temperature</output>
+	<microservice>
+		<id>readTempSensor</id>
+		<input>N.A</input>
+		<output>temperature</output>
+	</microservice>
+	<microservice>
+		<id>estTemp</id>
+		<input>N.A</input>
+		<output>temperature</output>
+	</microservice>
+	<microservice>
+		<id>getGPS</id>
+		<input>N.A</input>
+		<output>GPS:location</output>
+	</microservice>
+	<microservice>
+		<id>readLocTemp</id>
+		<input>location</input>
+		<output>temperature</output>
+	</microservice>
+</service>
